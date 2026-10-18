@@ -1,0 +1,25 @@
+{
+  "version": "V10 全部重置与模拟充值",
+  "total_checks": 215,
+  "suites": [
+    {
+      "suite": "万象重置充值检查_V10",
+      "checks": 48,
+      "failures": [],
+      "logs": []
+    },
+    {
+      "suite": "万象每日任务回归检查_V10",
+      "checks": 52,
+      "failures": [],
+      "logs": []
+    },
+    {
+      "suite": "万象原流程回归检查_V10",
+      "checks": 115,
+      "failures": [],
+      "logs": []
+    }
+  ],
+  "missing_assets": []
+}

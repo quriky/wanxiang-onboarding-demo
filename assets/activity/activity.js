@@ -1,0 +1,45 @@
+(function(){
+'use strict';
+const C=window.WxCampaign,$=s=>document.querySelector(s);let timer,activeDay=Math.min(3,Math.max(1,Number(new URLSearchParams(location.search).get('day'))||C.snapshot().uses||1)),pendingTask=null;
+const phaseNames=['先认识工具','找到你的搭档','让工作可以复用'];
+function toast(message){clearTimeout(timer);$('#toast').textContent=message;$('#toast').style.display='block';timer=setTimeout(()=>$('#toast').style.display='none',3400)}
+function taskStatus(t,s){const k=C.status(t,s);const text={unopened:'开通礼包后开启',todo:t.auto?'下次在不同日期回来后可签到':'',early:`已提前完成 · 第 ${t.stage} 天解锁`,claimable:'已完成 · 现在可以领取',claimed:'',closed:'任务期已结束，未完成',expired:'领取期已结束','locked-closed':'已完成，但未在 7 天内解锁该使用日'};return {k,text:text[k]}}
+function taskHTML(t,s){const {k,text}=taskStatus(t,s),done=!!s.completed[t.id],completeable=s.purchased&&s.currentDay<=7&&!t.auto&&!done;return `<div class="task-row" data-task="${t.id}"><span class="task-state-icon ${done?'complete':''}">${done?'✓':''}</span><div class="task-info"><h4>${t.title}</h4><p>${t.description}</p><span class="task-status ${k}">${text}</span></div><span class="task-points">+${t.points} 积分</span><div class="task-actions">${k==='claimable'?`<button class="btn primary" data-claim="${t.id}">${t.id.startsWith('visit')?'签到领奖':'领取'}</button>`:k==='claimed'?`<span class="disabled-label">✓ ${t.id.startsWith('visit')?'已签到':'已领取'}</span>`:completeable?`<button class="btn outline" data-route="${t.route}" data-task-guide="${t.id}">去完成</button>`:`<span class="disabled-label">${k==='early'?'待解锁':k==='expired'?'已到期':k==='locked-closed'?'未解锁':t.auto&&s.purchased?'待签到':'—'}</span>`}${completeable?`<button class="simulate-task" data-complete="${t.id}">模拟完成</button>`:''}</div></div>`}
+function render(){const s=C.snapshot(),ready=C.tasks.filter(t=>C.status(t,s)==='claimable'),available=ready.reduce((n,t)=>n+t.points,0),done=C.tasks.filter(t=>s.completed[t.id]).length,claimed=C.tasks.filter(t=>s.claimed[t.id]).length;
+$('#buy').textContent=s.purchased?'已开通 · 查看权益':'模拟开通礼包';$('#offer-status').textContent=s.purchased?`体验期至 ${s.rightsDeadline} 23:59（示例）`:'不连接支付，不产生订单或真实权益。';
+$('#summary').innerHTML=`<div class="summary-line"><strong>${s.purchased?'购买后第 '+s.currentDay+' 天 · 累计到访 '+s.uses+' / 3 天':'开通后开始累计使用日'}</strong><span>${s.purchased?'任务截止 '+s.taskDeadline+' · 领取截止 '+s.claimDeadline:'基础权益自动到账，任务奖励手动领取'}</span></div>`;
+$('#task-progress').textContent=done+' / 9 已完成';
+$('#day-tabs').innerHTML=[1,2,3].map(stage=>{const ts=C.tasks.filter(t=>t.stage===stage),n=ts.filter(t=>C.status(t,s)==='claimable').reduce((v,t)=>v+t.points,0),all=ts.every(t=>s.claimed[t.id]);return `<button type="button" role="tab" id="day-tab-${stage}" aria-controls="stage-${stage}" aria-selected="${stage===activeDay}" tabindex="${stage===activeDay?0:-1}" data-day="${stage}"><span>第 ${stage} 天</span><small>${n?'可领 '+n+' 积分':all?'已领完':!s.purchased?'开通后开启':s.currentDay>15?'领取已结束':s.uses<stage?'待解锁 · 可提前做':'已解锁'}</small></button>`}).join('');
+$('#task-groups').innerHTML=[1,2,3].map(stage=>{const tasks=C.tasks.filter(t=>t.stage===stage),unlocked=s.purchased&&s.uses>=stage,n=tasks.filter(t=>s.completed[t.id]).length;return `<section class="day-card ${unlocked?'':'day-locked'}" id="stage-${stage}" role="tabpanel" aria-labelledby="day-tab-${stage}" tabindex="0" ${stage===activeDay?'':'hidden'}><div class="day-header"><div class="day-label"><div><h3>第 ${stage} 天 · ${phaseNames[stage-1]}</h3><p>${unlocked?'已解锁，完成后可以领取':s.currentDay>7&&s.purchased?'未在 7 天任务期内解锁':'可以先做普通任务，等对应签到日期解锁后领取'}</p></div></div><span class="phase-badge ${unlocked?'ready':''}">${n} / 3 完成</span></div>${tasks.map(t=>taskHTML(t,s)).join('')}</section>`}).join('');
+$('#wallet-total').textContent=s.balancePoints.toLocaleString();$('#topup-points').textContent=s.topupPoints.toLocaleString();$('#base-points').textContent=s.basePoints;$('#claimed-points').textContent=s.claimedPoints;$('#available-points').textContent=available;
+$('#claim-all').disabled=available===0;$('#sticky-claim').disabled=available===0;$('#sticky-summary').textContent=available?`${ready.length} 项可领 · ${available} 积分`:'当前没有可领取积分';
+const days=[...new Set([1,2,3,7,8,15,16,31,s.currentDay])].sort((a,b)=>a-b);$('#demo-day').innerHTML=days.map(d=>`<option value="${d}" ${d<s.currentDay?'disabled':''} ${d===s.currentDay?'selected':''}>购买后第 ${d} 天${d===8?' · 补领期':d===16?' · 领取到期':d===31?' · 权益到期':''}</option>`).join('');$('#demo-day').disabled=!s.purchased;$('#change-day').disabled=!s.purchased;$('#early-all').disabled=!s.purchased||s.currentDay>7;
+}
+$('#buy').onclick=()=>{const s=C.snapshot();if(!s.purchased)$('#purchase-dialog').showModal();else toast(s.currentDay<=30?`示例权益有效至 ${s.rightsDeadline} 23:59；不代表真实开通。`:'30 天体验权益已模拟到期。')};
+$('#cancel-x').onclick=$('#cancel-buy').onclick=()=>$('#purchase-dialog').close();
+$('#confirm-buy').onclick=()=>{C.purchase();$('#purchase-dialog').close();toast('模拟开通成功：200 基础积分已自动到账。任务奖励可手动领取。')};
+function batch(){const r=C.claimAll();toast(r.points?`已模拟领取 ${r.ids.length} 项奖励，共 ${r.points} 积分。`:'当前没有可领取的奖励。')}
+$('#claim-all').onclick=$('#sticky-claim').onclick=batch;
+$('#change-day').onclick=()=>{const n=Number($('#demo-day').value);if(C.simulateDay(n)){activeDay=Math.min(3,Math.max(1,C.snapshot().uses));render();const s=C.snapshot();toast(s.currentDay<=7?`已切到购买后第 ${n} 天，累计 ${s.uses} 个使用日。`:s.currentDay<=15?'已进入补领期，不再新增任务进度或解锁使用日。':'领取期已结束，未领取的任务奖励已到期。')}};
+$('#early-all').onclick=()=>{const n=C.simulateAll();toast(n?`已模拟完成 ${n} 项普通任务。回访任务仍需不同日期进入。`:'可提前做的普通任务已全部记录。')};
+$('#reset').onclick=()=>$('#reset-dialog').showModal();$('#cancel-reset').onclick=()=>$('#reset-dialog').close();$('#confirm-reset').onclick=()=>{activeDay=1;C.reset();$('#reset-dialog').close();toast('活动已重置，平台和开工教学进度保留。')};
+document.addEventListener('click',e=>{const claim=e.target.closest('[data-claim]'),complete=e.target.closest('[data-complete]'),route=e.target.closest('[data-route]');if(claim){const r=C.claim([claim.dataset.claim]);toast(r.points?`已模拟领取 ${r.points} 积分。`:'这项奖励暂不可领取，或已经领取。')}if(complete){const ok=C.complete(complete.dataset.complete);toast(ok?'已记录模拟完成。领取资格按对应使用日解锁。':'当前不能新增任务进度。')}if(route)openTaskGuide(route.dataset.taskGuide);});
+
+const guides={
+ case:{title:'先找一个喜欢的案例',intro:'看过一次案例详情，就算完成这项任务。',steps:['进入案例页，选择感兴趣的作品。','点击案例卡片，打开作品详情。','返回任务页，领取这项任务的积分。'],note:'不需要生成内容，也不需要消费积分。',label:'去看案例',url:'index.html?activityRoute=cases&taskGuide=case'},
+ app:{title:'先打开万象开工应用页',intro:'会先进入应用详情，再按当前状态订阅、下载或打开。',steps:['查看万象开工的应用详情。','未订阅时先模拟订阅，选择系统下载并查看安装说明。','点击“打开应用”进入开工演示，随后返回领积分。'],note:'仅浏览应用详情不会完成任务；进入开工演示才会记录。',label:'去应用详情',url:'index.html?activityRoute=kaigong&taskGuide=app'},
+ hire:{title:'让一位员工帮你完成工作',intro:'先录用，再交给它一句明确的任务。',steps:['在人才市场打开员工档案，查看能力。','点击录用，选择工位并确认。','进入员工对话，输入需求并模拟发送。'],note:'浏览教学不会代替任务操作，需自行确认录用并发送。',label:'去人才市场',url:'kaigong.html?section=market&taskGuide=hire'},
+ phone:{title:'连接手机，也可以引用资料',intro:'两种方式任选其一，方便时再关联微信。',steps:['查看链接手机的操作说明。','不方便关联时，可以切到对话输入“@”，选择资料并发送。','返回任务页查看完成状态。'],note:'演示不会发起真实微信授权。也可展开演示工具模拟完成。',label:'查看操作入口',url:'kaigong.html?section=phone&taskGuide=phone'},
+ create:{title:'创建你的专属员工',intro:'给员工一个名称，再说明它负责什么。',steps:['填写员工名称和职责。','点击“创建并去对话”。','输入一件要交给它的工作，模拟发送。'],note:'本页创建的是演示员工，不会增加真实账号或费用。',label:'去添加员工',url:'kaigong.html?section=createAgent&taskGuide=create'},
+ automation:{title:'安排一条自动化任务',intro:'说清做什么、什么时候做，以及交给谁。',steps:['在自动化页点击新建任务。','填写工作安排，生成任务草稿。','核对内容和时间，点击模拟保存。'],note:'保存仅用于演示，不会真实执行或发送消息。',label:'去安排任务',url:'kaigong.html?section=automation&taskGuide=automation'}
+};
+function openTaskGuide(id){const g=guides[id];if(!g)return;pendingTask=id;$('#task-guide-title').textContent=g.title;$('#task-guide-intro').textContent=g.intro;$('#task-guide-steps').replaceChildren(...g.steps.map(text=>{const li=document.createElement('li');li.textContent=text;return li}));$('#task-guide-note').textContent=g.note;$('#task-guide-go').textContent=g.label;$('#task-guide-dialog').showModal()}
+$('#task-guide-close').onclick=$('#task-guide-cancel').onclick=()=>$('#task-guide-dialog').close();
+$('#task-guide-go').onclick=()=>{if(pendingTask&&guides[pendingTask]){C.ackReminder();location.href=C.decorateUrl(guides[pendingTask].url)}};
+function selectDay(n){if(![1,2,3].includes(n))return;activeDay=n;render()}
+$('#day-tabs').onclick=e=>{const b=e.target.closest('[data-day]');if(b){const n=+b.dataset.day;selectDay(n);$('#day-tab-'+n).focus()}};
+$('#day-tabs').onkeydown=e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const n=e.key==='Home'?1:e.key==='End'?3:(activeDay-1+(e.key==='ArrowRight'?1:2))%3+1;selectDay(n);$('#day-tab-'+n).focus()};
+$('#preview-reminder').onclick=()=>window.WxReminders?.show(true);
+window.WxActivity={selectDay,openTaskGuide,get day(){return activeDay}};
+$('#demo-tools').addEventListener('toggle',()=>document.body.classList.toggle('show-demo',$('#demo-tools').open));addEventListener('wx-campaign-change',render);addEventListener('storage',e=>{if(e.key===C.key)render()});render();
+})();
