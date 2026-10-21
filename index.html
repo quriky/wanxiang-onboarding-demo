@@ -105,13 +105,14 @@ dialog.letter-welcome::backdrop{background:rgba(255,255,255,.91);backdrop-filter
 
 .rail-gift{display:flex;flex-direction:column;align-items:center;gap:4px;color:#707894;font-size:11px;padding:8px 2px;border-radius:9px}.rail-gift:hover{background:#eeeff8;color:var(--blue)}.recharge-banner{background:#fff;border:1px solid #e5e8f0;border-radius:12px;overflow:hidden;margin-bottom:20px}.campaign-banner-link{display:block;color:inherit}.campaign-banner-link img{display:block;width:100%;height:auto;max-width:820px;margin:0 auto}.campaign-banner-caption{display:flex;justify-content:space-between;align-items:center;padding:10px 20px;font-size:12px;border-top:1px solid #f0f1f6;background:#fcfcfe;color:#7b8192;text-decoration:none}.campaign-banner-caption b{font-weight:500;color:var(--blue)}.recharge-panel{border-radius:12px;padding:22px;box-shadow:none}.amount{border-radius:8px;min-height:80px}.amount.selected{background:#30338b;box-shadow:none}.amount.selected:after{color:white}.amount strong{font-size:23px}.amount-grid{gap:10px}.summary{border-radius:8px;background:#f7f8fc;padding:18px}.ratio{background:none;padding:0;font-size:13px}.billing-note{margin-top:18px;padding-top:14px}.recharge-help{padding:16px 2px;border-bottom:1px solid #e4e7ef;color:#768095;font-size:13px}.recharge-help summary{cursor:pointer;color:#586178}.recharge-help p{font-size:12px;line-height:1.9;margin-top:10px;max-width:800px}.recharge-app-bridge{border-radius:10px;padding:18px 20px;margin-top:18px;background:#fff;border:1px solid #e5e8ef}.recharge-app-bridge h2{font-size:16px}.recharge-app-bridge p{font-size:12px;margin-top:5px}.recharge-app-bridge .btn{font-size:12px;padding:9px 15px}.recharge-layout{grid-template-columns:minmax(0,1fr) 260px}
 @media(max-width:950px){.recharge-layout{grid-template-columns:minmax(0,1fr) 225px;gap:16px}}@media(max-width:650px){.recharge-layout{grid-template-columns:1fr}.recharge-panel{padding:17px}.campaign-banner-caption{padding:10px 12px;font-size:11px}.amount{min-height:76px}.amount strong{font-size:21px}.recharge-app-bridge{padding:16px}.recharge-app-bridge .btn{margin-top:12px}.rail-gift{padding:5px 2px}.campaign-banner-link img{width:100%}.ratio{font-size:12px}}
+.new-offer-banner{display:block;background:linear-gradient(120deg,#eeedfb,#f5f7ff);border:1px solid #dedff1;border-radius:16px;padding:28px 30px;color:#30336e;text-decoration:none}.new-offer-banner>span{font-size:13px}.new-offer-banner h2{font-size:25px;margin:12px 0 8px}.new-offer-banner p{color:#737b99;font-size:14px}.new-offer-banner>b{display:inline-block;margin-top:19px;background:#30338b;color:white;padding:10px 18px;border-radius:8px}.case-like{margin-top:18px}@media(max-width:650px){.new-offer-banner{padding:20px}.new-offer-banner h2{font-size:21px}.new-offer-banner p{font-size:12px}}
 </style>
-<link rel="stylesheet" href="assets/activity/reminders.css"><link rel="stylesheet" href="assets/activity/demo-controls.css"></head>
+<link rel="stylesheet" href="assets/activity/reminders.css"><link rel="stylesheet" href="assets/activity/demo-controls.css"><link rel="stylesheet" href="assets/activity/starter-panel.css"></head>
 <body>
 <aside class="sidebar" id="sidebar"><div class="brand"><div class="brand-art" data-brand></div>万象百应</div><nav class="nav" aria-label="主导航">
 <button id="nav-home" data-page="home"></button><button id="nav-apps" data-page="apps"></button><button id="nav-cases" data-page="cases"></button><button id="nav-assets" data-page="assets"></button><button id="nav-models" data-page="models"></button><button id="nav-mine" data-page="mine"></button>
 </nav><div class="rail-bottom"><a id="activity-rail-entry" class="rail-gift" href="activity.html" aria-label="新手礼包与任务"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 10h16v11H4zM3 6h18v4H3zM12 6v15M12 6C8-1 3 3 7 6zM12 6c4-7 9-3 5 0z"/></svg><span>礼包</span></a><div class="credit-mini" id="recharge-entry"><strong>0</strong>示例积分<button data-page="recharge">充值</button></div><div class="user" title="新客户示例账户">新</div></div></aside>
-<header class="demo-bar" id="demo-bar"><span class="demo-label"><i class="demo-dot"></i>引导体验原型<span class="detail">· 功能仅作演示</span></span><div class="bar-actions"><a class="text-btn gift-entry" href="activity.html">新人礼包</a><button class="text-btn" id="reset">重置百应演示</button><button class="text-btn" id="replay">重新引导 ↗</button></div></header>
+<header class="demo-bar" id="demo-bar"><span class="demo-label"><i class="demo-dot"></i>引导体验原型<span class="detail">· 功能仅作演示</span></span><div class="bar-actions"><a class="text-btn gift-entry" href="activity.html">新手任务</a><button class="text-btn" id="reset">重置百应演示</button><button class="text-btn" id="replay">重新引导 ↗</button></div></header>
 <main class="main" id="main"></main>
 <div class="guide-shield" id="guide"><div class="guide-veil" id="guide-veil"></div><div class="spot" id="spot"></div><section class="coach" id="coach" role="dialog" aria-modal="true" aria-labelledby="coach-title" aria-describedby="coach-desc" tabindex="-1"><div class="coach-header"><span class="coach-label"><i></i>万象百应 · 新手引导</span><button class="icon-btn" id="guide-close" aria-label="退出引导">×</button></div><h2 id="coach-title"></h2><p id="coach-desc"></p><div class="coach-tip" id="coach-tip"></div><div class="coach-footer"><div class="coach-foot-left"><div class="step-dots" id="dots"></div><button class="coach-skip" id="skip">暂时跳过</button><div class="coach-keyboard"><kbd>空格</kbd> 下一步</div></div><div class="coach-controls"><button class="btn secondary" id="prev">上一步</button><button class="btn primary" id="next">下一步 →</button></div></div><div class="guide-progress"><span id="progress"></span></div></section></div>
 <dialog id="welcome" class="letter-welcome" aria-labelledby="welcome-title">
@@ -148,7 +149,7 @@ const caseTypes=['产品营销','设计办公','产品营销','设计办公','�
 const caseDescriptions=['用产品主视觉、英文卖点与尺寸信息，展示露营灯的使用场景。','用清楚的户型平面布局，展示住宅的空间安排。','用食物主视觉展示汉堡产品的画面风格。','结合建筑效果与图纸信息，展示别墅方案的表达方式。','围绕孩子的饮食问题，展示温暖的育儿内容风格。','用像素画风，展示知识与故事内容的表达方式。','用文物主视觉与讲解信息，展示文化内容的呈现方式。','围绕家庭陪伴，展示温暖的人物与场景内容。','用清晰的标题与内容层次，展示知识类内容排版。','结合活动场景与页面示意，展示报名小程序的案例方向。'];
 function casePrompt(i){return `我想参考《${examples[i][0]}》的展示方式，制作自己的内容。\n我的产品或主题：请填写\n我想保留的风格：请填写\n我能提供的素材：请填写`;}
 function casesHTML(){const list=examples.map((e,i)=>({e,i})).filter(({i})=>caseFilter==='全部案例'||caseTypes[i]===caseFilter);return `<div class="case-filters">${['全部案例','内容创作','产品营销','设计办公'].map(t=>`<button data-case-filter="${t}" class="${caseFilter===t?'selected':''}">${t}</button>`).join('')}<span class="case-count">${list.length} 个案例示例</span></div><div class="case-grid" id="case-grid">${list.map(({e,i})=>`<button class="case-card" data-case="${i}" aria-label="查看案例：${e[0]}"><div style="aspect-ratio:${e[3]}/${e[4]}">${art('cases',...e.slice(1))}</div><div class="case-name"><span>${e[0]}</span><small>${caseTypes[i]} · 查看 ↗</small></div></button>`).join('')}</div>`}
-function caseDetail(){const e=examples[currentCase];return `<button class="detail-back" data-page="cases">← 返回案例</button><div class="case-detail-grid"><div><div class="case-poster"><div class="case-poster-inner" style="aspect-ratio:${e[3]}/${e[4]}">${art('cases',...e.slice(1))}</div></div><p class="case-return-note">作品封面来自提供的社区截图。本页演示查看与使用路径，不播放真实成片。</p></div><div><section class="case-info" id="case-info"><span class="pill">${caseTypes[currentCase]} · 社区案例示例</span><h1>${e[0]}</h1><p>${caseDescriptions[currentCase]}</p><div class="case-how"><h2>这个案例怎么用？</h2><ol><li>先看作品风格是否适合自己。</li><li>准备自己的主题、需求和素材。</li><li>点击“做同款”，再选择应用继续。</li></ol></div></section><section class="remix-panel" id="remix-panel"><h2>从这个案例开始</h2><p>保留你喜欢的方向，把内容换成自己的。下面的需求可以修改。</p><textarea id="case-request" aria-label="做同款需求"></textarea><button class="btn primary" id="remix-button">做同款，去选择应用 →</button><small>这里只带入需求草稿，不自动发送，也不会生成作品。</small></section></div></div>`}
+function caseDetail(){const e=examples[currentCase];return `<button class="detail-back" data-page="cases">← 返回案例</button><div class="case-detail-grid"><div><div class="case-poster"><div class="case-poster-inner" style="aspect-ratio:${e[3]}/${e[4]}">${art('cases',...e.slice(1))}</div></div><p class="case-return-note">作品封面来自提供的社区截图。本页演示查看与使用路径，不播放真实成片。</p></div><div><section class="case-info" id="case-info"><span class="pill">${caseTypes[currentCase]} · 社区案例示例</span><h1>${e[0]}</h1><p>${caseDescriptions[currentCase]}</p><button class="btn outline case-like" id="case-like" aria-pressed="${!!WxCampaign.snapshot().flags['case-like']}">${WxCampaign.snapshot().flags['case-like']?'♥ 已点赞':'♡ 点赞'}</button><div class="case-how"><h2>这个案例怎么用？</h2><ol><li>先看作品风格是否适合自己。</li><li>准备自己的主题、需求和素材。</li><li>点击“做同款”，再选择应用继续。</li></ol></div></section><section class="remix-panel" id="remix-panel"><h2>从这个案例开始</h2><p>保留你喜欢的方向，把内容换成自己的。下面的需求可以修改。</p><textarea id="case-request" aria-label="做同款需求"></textarea><button class="btn primary" id="remix-button">做同款，去选择应用 →</button><small>这里只带入需求草稿，不自动发送，也不会生成作品。</small></section></div></div>`}
 function search(label){return `<div class="search">${icon('search')}${label}</div>`}
 function render(p){page=p;$('#main').innerHTML=`<div class="page">${content(p)}<p class="bottom-note">万象百应 · 新客户功能引导原型 / 展示内容以正式平台为准</p></div>`;document.querySelectorAll('.nav button').forEach(e=>e.classList.toggle('active',e.dataset.page===(p==='kaigong'?'apps':p==='case-detail'?'cases':p)));bindPage();if($('#case-draft-text'))$('#case-draft-text').textContent=remixDraft;if(p==='case-detail'){$('#case-request').value=casePrompt(currentCase);if(step<0)WxCampaign.record('case');}updateActivityBadge();persistPortal();}
 function content(p){if(p==='case-detail')return caseDetail();if(p==='kaigong')return kaigongDetail();if(p==='home')return `<div class="hero" id="home-hero">${art('home',90,16,1230,435)}<button class="hero-action" data-page="cases" aria-label="查看精选案例"></button></div><div class="section-head"><h2>推荐应用</h2><button class="text-btn" data-page="apps">查看全部 →</button></div>${appsHTML()}<div class="help-strip"><div><h3>第一次来？先从一个应用开始</h3><p>选一个适合你的工具，或者去案例里找找灵感。</p></div><button class="btn outline" data-page="cases">去看看案例 →</button></div>`;
@@ -161,38 +162,133 @@ return `<div class="page-header"><div><h1>${p==='assets'?'素材管理':'模型�
 function topupHistory(){const s=WxCampaign.snapshot();return `<details class="recharge-history"><summary>充值记录 · 累计 ${s.topupPoints.toLocaleString()} 积分</summary>${s.topups.length?'<ul>'+[...s.topups].reverse().map(t=>`<li><time>${new Date(t.at).toLocaleString('zh-CN',{hour12:false})}</time><span>模拟充值 ¥${t.amount.toLocaleString()}</span><b>+${t.points.toLocaleString()} 积分</b></li>`).join('')+'</ul>':'<p>还没有充值记录。</p>'}</details>`}
 function previewRecharge(){const selected=amount;if(!Number.isInteger(selected)||selected<10||selected>1000000)return;const token='topup-'+Date.now()+'-'+Math.random().toString(36).slice(2);showAction('确认模拟充值','只增加演示积分，不会扣款或发起真实支付。',`本次金额：¥ ${selected.toLocaleString()}<br>预计到账：${(selected*100).toLocaleString()} 积分<br>当前余额：${WxCampaign.snapshot().balancePoints.toLocaleString()} 积分`,'确认模拟充值',()=>{const button=$('#action-cta');button.disabled=true;const r=WxCampaign.recharge(selected,token);if(!r.ok){closeAction();toast('金额无效，请重新选择。');return}showAction('充值成功','演示积分已到账，刷新或切换页面仍会保留。',`本次到账：${r.points.toLocaleString()} 积分<br>当前余额：${WxCampaign.snapshot().balancePoints.toLocaleString()} 积分`,'完成',closeAction)})}
 
-function bindPage(){document.querySelectorAll('[data-app]').forEach(e=>e.onclick=()=>openApp(+e.dataset.app));document.querySelectorAll('[data-case]').forEach(e=>e.onclick=()=>openCase(+e.dataset.case));document.querySelectorAll('[data-amount]').forEach(e=>e.onclick=()=>{amount=+e.dataset.amount;custom=false;render('recharge')});if($('#custom')){$('#custom').onclick=()=>{custom=true;render('recharge');$('#points').innerHTML='—<span>积分</span>';$('#pay').textContent='¥ —';$('#pay-button').disabled=true;$('#custom-input').focus()};$('#custom-input').oninput=e=>{const v=Number(e.target.value),ok=!!e.target.value&&Number.isInteger(v)&&v>=10&&v<=1000000;$('#custom-error').textContent=e.target.value&&!ok?'请输入 10 元及以上的整数（本原型最高演示 100 万元）':'';$('#points').innerHTML=(ok?(v*100).toLocaleString():'—')+'<span>积分</span>';$('#pay').textContent=ok?'¥ '+v.toFixed(2):'¥ —';$('#pay-button').disabled=!ok;if(ok)amount=v};$('#pay-button').onclick=previewRecharge}}
+function bindPage(){if($('#case-like'))$('#case-like').onclick=()=>{WxCampaign.record('case');WxCampaign.record('case-like');$('#case-like').textContent='♥ 已点赞';$('#case-like').setAttribute('aria-pressed','true');};document.querySelectorAll('[data-app]').forEach(e=>e.onclick=()=>openApp(+e.dataset.app));document.querySelectorAll('[data-case]').forEach(e=>e.onclick=()=>openCase(+e.dataset.case));document.querySelectorAll('[data-amount]').forEach(e=>e.onclick=()=>{amount=+e.dataset.amount;custom=false;render('recharge')});if($('#custom')){$('#custom').onclick=()=>{custom=true;render('recharge');$('#points').innerHTML='—<span>积分</span>';$('#pay').textContent='¥ —';$('#pay-button').disabled=true;$('#custom-input').focus()};$('#custom-input').oninput=e=>{const v=Number(e.target.value),ok=!!e.target.value&&Number.isInteger(v)&&v>=10&&v<=1000000;$('#custom-error').textContent=e.target.value&&!ok?'请输入 10 元及以上的整数（本原型最高演示 100 万元）':'';$('#points').innerHTML=(ok?(v*100).toLocaleString():'—')+'<span>积分</span>';$('#pay').textContent=ok?'¥ '+v.toFixed(2):'¥ —';$('#pay-button').disabled=!ok;if(ok)amount=v};$('#pay-button').onclick=previewRecharge}}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-page]');if(b&&step<0){render(b.dataset.page);window.scrollTo(0,0)}const d=e.target.closest('[data-demo]');if(d)toast(d.dataset.demo+'：此处为功能入口示意')});
 function showAction(title,desc,box,button,fn){const body=$('#action-body');body.innerHTML=`<div class="eyebrow">WANXIANG · 功能体验</div><h2 id="action-title"></h2><p id="action-desc"></p><div class="action-box" id="action-box"></div><button class="btn primary" id="action-cta"></button>`;$('#action-title').textContent=title;$('#action-desc').textContent=desc;$('#action-box').innerHTML=box;$('#action-cta').textContent=button;$('#action-cta').onclick=fn;$('#action').showModal()}
 function closeAction(){$('#action').close()}
 
 function downloadControls(){const teachingDownload=step>=0&&steps[step]?.action==='download';return `<div class="download-options" id="download-options">${downloaded&&!teachingDownload?`<button class="btn primary" id="open-app-button" data-open-kaigong>打开应用</button><p class="download-hint">下载流程已演示完成。点击进入开工网页演示。</p>`:`<div class="download-heading">下载客户端 <span>按电脑系统选择</span></div><button class="btn primary" data-download="Windows" ${subscribed?'':'disabled'}>↓ 下载 Windows 版</button><button class="btn outline" data-download="Mac" ${subscribed?'':'disabled'}>↓ 下载 Mac 版</button><p class="download-hint">${subscribed?'本页为下载演示，不会下载真实安装包。':'完成订阅应用后，即可选择下载。'}</p>`}</div>`}
-function kaigongDetail(){return `<button class="detail-back" data-page="apps">← 返回应用</button><div class="detail-grid"><div class="detail-copy-column"><div class="detail-hero">${art('kaigong',90,58,894,340)}</div><section class="install-guide" id="install-guide"><h2>下载后，怎么开始用？</h2><p>订阅、下载、安装，按顺序完成就可以。</p><div class="install-flow"><article><span class="num">01</span><b>订阅应用</b><p>点击详情页的“订阅应用”，将应用添加到我的应用。</p></article><article><span class="num">02</span><b>选择系统下载</b><p>Windows 电脑选 Windows；苹果电脑选 Mac。</p></article><article><span class="num">03</span><b>安装并打开</b><p>下载后打开安装包，按提示完成安装，再打开客户端登录。</p></article></div></section><section class="detail-about"><div class="eyebrow">ABOUT</div><h2>万象开工能帮你做什么？</h2><p>你的 AI 专家团队，从一句话到真实交付。</p><ul><li>选择适合任务的智能体，描述你的需求。</li><li>按对话提示补充资料，逐步完成内容与工作任务。</li><li>也可以先看案例，了解不同任务的使用方式。</li></ul></section></div><aside class="detail-side"><div class="detail-brand"><div class="detail-logo">${art('kaigong',1028,75,61,61)}</div><div><h1>万象开工</h1><p>你的 AI 专家团队，从一句话到真实交付。</p></div></div><div class="detail-tags"><span>效率工具</span><span class="status ${subscribed?'ok':''}">${subscribed?'已订阅':'未订阅'}</span></div><div class="detail-platform">${icon('models')} Mac · Windows</div><p class="detail-license">订阅及使用权益以正式页面为准</p><div class="need-download"><b>${downloaded?'桌面应用 · 可打开体验':'桌面应用 · 需下载安装'}</b>${downloaded?'下载步骤已演示完成，点击“打开应用”继续体验万象开工。':subscribed?'已订阅。接下来选择你的电脑系统，下载并安装客户端。':'先订阅应用，再下载客户端。新客户需要下载安装后使用。'}</div><div class="subscription-area" id="subscription-panel"><button class="btn ${subscribed?'outline':'primary'}" id="subscribe-button" ${subscribed?'disabled':''}>${subscribed?'✓ 已订阅，已添加到我的应用':'订阅应用'}</button><p class="subscribe-note">这里仅模拟订阅。正式使用需具备对应权益，模型消耗以计费说明为准。</p></div>${downloadControls()}</aside></div><section class="app-bridge"><div><h2>去万象开工试一试</h2><p>网页演示，无需下载安装。</p></div><a class="btn primary" href="kaigong.html?from=portal" data-open-kaigong>打开万象开工演示 →</a></section>`}
+function kaigongDetail(){return `<button class="detail-back" data-page="apps">← 返回应用</button><div class="detail-grid"><div class="detail-copy-column"><div class="detail-hero">${art('kaigong',90,58,894,340)}</div><section class="install-guide" id="install-guide"><h2>下载后，怎么开始用？</h2><p>订阅、下载、安装，按顺序完成就可以。</p><div class="install-flow"><article><span class="num">01</span><b>订阅应用</b><p>点击详情页的“订阅应用”，将应用添加到我的应用。</p></article><article><span class="num">02</span><b>选择系统下载</b><p>Windows 电脑选 Windows；苹果电脑选 Mac。</p></article><article><span class="num">03</span><b>安装并打开</b><p>下载后打开安装包，按提示完成安装，再打开客户端登录。</p></article></div></section><section class="detail-about"><div class="eyebrow">ABOUT</div><h2>万象开工能帮你做什么？</h2><p>你的 AI 专家团队，从一句话到真实交付。</p><ul><li>选择适合任务的数字员工，描述你的需求。</li><li>按对话提示补充资料，逐步完成内容与工作任务。</li><li>也可以先看案例，了解不同任务的使用方式。</li></ul></section></div><aside class="detail-side"><div class="detail-brand"><div class="detail-logo">${art('kaigong',1028,75,61,61)}</div><div><h1>万象开工</h1><p>你的 AI 专家团队，从一句话到真实交付。</p></div></div><div class="detail-tags"><span>效率工具</span><span class="status ${subscribed?'ok':''}">${subscribed?'已订阅':'未订阅'}</span></div><div class="detail-platform">${icon('models')} Mac · Windows</div><p class="detail-license">订阅及使用权益以正式页面为准</p><div class="need-download"><b>${downloaded?'桌面应用 · 可打开体验':'桌面应用 · 需下载安装'}</b>${downloaded?'下载步骤已演示完成，点击“打开应用”继续体验万象开工。':subscribed?'已订阅。接下来选择你的电脑系统，下载并安装客户端。':'先订阅应用，再下载客户端。新客户需要下载安装后使用。'}</div><div class="subscription-area" id="subscription-panel"><button class="btn ${subscribed?'outline':'primary'}" id="subscribe-button" ${subscribed?'disabled':''}>${subscribed?'✓ 已订阅，已添加到我的应用':'订阅应用'}</button><p class="subscribe-note">这里仅模拟订阅。正式使用需具备对应权益，模型消耗以计费说明为准。</p></div>${downloadControls()}</aside></div><section class="app-bridge"><div><h2>去万象开工试一试</h2><p>网页演示，无需下载安装。</p></div><a class="btn primary" href="kaigong.html?from=portal" data-open-kaigong>打开万象开工演示 →</a></section>`}
 document.addEventListener('click',e=>{
   if(e.target.closest('#subscribe-button')&&!subscribed){subscribed=true;added=true;render('kaigong');toast('模拟订阅完成，可以选择客户端下载。');}
   const download=e.target.closest('[data-download]');if(download&&!download.disabled){downloaded=true;render('kaigong');toast('下载演示完成，点击“打开应用”继续。');$('#download-options').scrollIntoView({block:'nearest',behavior:'smooth'});$('#open-app-button')?.focus({preventScroll:true});}
 });
 
-function openApp(i){if(i===1){render('kaigong');window.scrollTo(0,0);return;}const a=appData[i];showAction(a.name,a.desc,i===1?'选一个你需要的智能体，用一句话描述任务，再按对话提示补充资料。<br><br>比如：帮我写一条介绍产品的口播脚本。<br><br>这里只介绍使用方式，未连接真实智能体。':i===0?'适合从创意出发组织内容创作。<br><br>你可以先从案例了解效果，再进入应用体验。<br><br>这里的打开按钮只作演示。':'提供安装与配置的操作引导。<br><br>此处不会下载或安装软件。',i===2?'知道了':'模拟打开应用',()=>{closeAction();toast(i===2?'已了解这个应用':'演示：已进入「'+a.name+'」')})}
+function openApp(i){if(i===1){render('kaigong');window.scrollTo(0,0);return;}const a=appData[i];showAction(a.name,a.desc,i===1?'选一个你需要的数字员工，用一句话描述任务，再按对话提示补充资料。<br><br>比如：帮我写一条介绍产品的口播脚本。<br><br>这里只介绍使用方式，未连接真实数字员工。':i===0?'适合从创意出发组织内容创作。<br><br>你可以先从案例了解效果，再进入应用体验。<br><br>这里的打开按钮只作演示。':'提供安装与配置的操作引导。<br><br>此处不会下载或安装软件。',i===2?'知道了':'模拟打开应用',()=>{closeAction();toast(i===2?'已了解这个应用':'演示：已进入「'+a.name+'」')})}
 function openCase(i){currentCase=i;render('case-detail');$('#case-request').value=casePrompt(i);window.scrollTo(0,0);}
-document.addEventListener('click',e=>{const filter=e.target.closest('[data-case-filter]');if(filter){caseFilter=filter.dataset.caseFilter;render('cases');}if(e.target.closest('#remix-button')){remixDraft=$('#case-request').value;render('apps');window.scrollTo(0,0);toast('演示：已准备案例需求，请选择应用继续。');}});
+document.addEventListener('click',e=>{const filter=e.target.closest('[data-case-filter]');if(filter){caseFilter=filter.dataset.caseFilter;render('cases');}if(e.target.closest('#remix-button')){remixDraft=$('#case-request').value;WxCampaign.record('remix');render('apps');window.scrollTo(0,0);toast('演示：已准备案例需求，请选择应用继续。');}});
 
 function toast(t){clearTimeout(toastTimer);$('#toast').textContent=t;$('#toast').style.display='block';toastTimer=setTimeout(()=>$('#toast').style.display='none',3500)}
 const steps=[
-{page:'home',target:'#nav-apps',title:'想做什么，先找应用',desc:'从这里进入应用页，了解不同工具能帮你做什么。新客户先选一个感兴趣的应用开始。',tip:'不用一上来研究所有功能。',side:'right'},
-{page:'apps',target:'#app-grid',title:'每个应用，都有自己的用途',desc:'万象画布偏内容创作，万象开工提供 AI 专家协作。点开应用，先了解用途和使用方式。',tip:'这里也能找到安装与配置类的工具。',side:'bottom'},
-{page:'apps',target:'#app-1',title:'万象开工，需要下载安装',desc:'点击应用卡片进入详情。万象开工是桌面应用，新客户需要先订阅，再下载客户端使用。',tip:'接下来带你走一遍订阅和下载流程。',side:'bottom',nextLabel:'进入详情 →'},
-{page:'kaigong',target:'#subscription-panel',title:'第一步：订阅应用',desc:'在应用详情页点击“订阅应用”。订阅后，应用会添加到“我的应用”，方便下次找到。',tip:'这里只演示订阅操作，不开通真实付费权益。',side:'left',action:'subscribe',nextLabel:'模拟订阅应用 →'},
-{page:'kaigong',target:'#download-options',title:'第二步：按电脑系统下载',desc:'Windows 电脑选择 Windows 版，苹果电脑选择 Mac 版。正式版点击对应按钮即可下载客户端。',tip:'本原型只演示操作，不会下载真实安装包。',side:'left',action:'download',nextLabel:'体验下载操作 →'},
-{page:'kaigong',target:'#install-guide',title:'第三步：安装，然后打开客户端',desc:'下载后打开安装包，按提示完成安装。打开万象开工后登录，再选择智能体描述你的任务。',tip:'比如：“帮我写一条产品口播脚本。”',side:'bottom'},
-{page:'kaigong',target:'#nav-cases',title:'工具认识了，接下来找个创作起点',desc:'订阅和下载流程已经了解。先不用自己从零想需求，我们回到万象百应的“案例”，看看别人做出了什么效果。',tip:'下一站：看作品，找灵感，再试试做同款。',side:'right',nextLabel:'进入案例页 →'},
-{page:'cases',target:'[data-case="0"]',title:'先挑一个接近你需求的案例',desc:'这里可以按内容创作、产品营销、设计办公筛选。先看封面和标题，找到喜欢的方向，再点进去看具体说明。',tip:'用“露营灯出海”示例，看看完整的查看路径。',side:'right',nextLabel:'打开案例看看 →'},
-{page:'case-detail',target:'#case-info',title:'打开案例后，先看效果和做法',desc:'详情页把作品封面、展示方向和使用步骤放在一起。先判断是否适合自己，再准备自己的主题和素材。',tip:'参考的是表达方式，内容要换成你自己的。',side:'left'},
-{page:'case-detail',target:'#remix-panel',title:'喜欢这个方向，就从“做同款”开始',desc:'补充你的产品或主题、想保留的风格和素材，再点击“做同款”选择应用继续。这里先带入需求草稿，不会自动发送。',tip:'工具和案例都认识后，最后再了解一下积分。',side:'left',nextLabel:'接下来了解积分 →'},
-{page:'case-detail',target:'#recharge-entry',title:'最后，了解积分入口',desc:'已经知道怎么找工具、看案例。需要补充积分时，点击左下方的“充值”，再按实际需要选择金额。',tip:'先了解功能，再按实际需要充值。',side:'right'},
-{page:'recharge',target:'#ratio',title:'充值比例：1 元 = 100 积分',desc:'按当前页面的比例，充值 10 元对应 1,000 积分，充值 50 元对应 5,000 积分。',tip:'兑换比例不等于每次任务的价格，消耗要看具体计费说明。',side:'bottom'},
-{page:'recharge',target:'#amount-grid',title:'选金额，看看积分怎么换算',desc:'可以选择常用金额，或填写自定义金额。右侧会展示预计到账积分和应付金额。',tip:'引导结束后可以点选试试；本原型不会产生真实付款。',side:'bottom'}
+  {
+    "page": "home",
+    "target": "#nav-apps",
+    "title": "先找个能帮上忙的应用",
+    "desc": "想写内容、做设计，还是处理日常工作？点这里，先看看有哪些应用。",
+    "tip": "从你手头的一件小事开始就好。",
+    "side": "right"
+  },
+  {
+    "page": "apps",
+    "target": "#app-grid",
+    "title": "挑一个你用得上的",
+    "desc": "每个应用擅长的事不一样。先看看介绍，选一个接近你手头任务的就好。",
+    "tip": "不用把所有工具都试一遍。",
+    "side": "bottom"
+  },
+  {
+    "page": "apps",
+    "target": "#app-1",
+    "title": "从万象开工试起",
+    "desc": "开工里有帮你写内容、做表格、处理工作的数字员工。点开看看，接下来一起完成订阅和下载。",
+    "tip": "开工是电脑应用，下载后在客户端继续使用。",
+    "side": "bottom",
+    "nextLabel": "点开看看 →"
+  },
+  {
+    "page": "kaigong",
+    "target": "#subscription-panel",
+    "title": "先把开工加入“我的应用”",
+    "desc": "点一下“订阅应用”，以后就能在“我的应用”里找到它。",
+    "tip": "当前是操作演示，不会开通真实权益。",
+    "side": "left",
+    "action": "subscribe",
+    "nextLabel": "试试订阅 →"
+  },
+  {
+    "page": "kaigong",
+    "target": "#download-options",
+    "title": "选你电脑对应的版本",
+    "desc": "Windows 电脑选 Windows，苹果电脑选 Mac。下载后，按安装提示打开开工就可以。",
+    "tip": "这里只体验下载步骤，不会下载真实安装包。",
+    "side": "left",
+    "action": "download",
+    "nextLabel": "试试下载 →"
+  },
+  {
+    "page": "kaigong",
+    "target": "#nav-cases",
+    "title": "再找点适合自己的灵感",
+    "desc": "回到“案例”，看看别人用这些工具做出了什么。挑个接近你需求的，会更容易开始。",
+    "tip": "先看效果，再想想自己能怎么用。",
+    "side": "right",
+    "nextLabel": "去看看案例 →"
+  },
+  {
+    "page": "cases",
+    "target": "[data-case=\"0\"]",
+    "title": "挑一个你感兴趣的",
+    "desc": "海报、视频、办公资料，都可以按分类看看。我们先点开“露营灯出海”，看看它是怎么做的。",
+    "tip": "先挑接近你想做的那一种。",
+    "side": "right",
+    "nextLabel": "打开看看 →"
+  },
+  {
+    "page": "case-detail",
+    "target": "#case-info",
+    "title": "这个效果，你也用得上吗？",
+    "desc": "先看看作品，再看旁边的做法。如果方向合适，就准备自己的主题和素材。",
+    "tip": "借个思路，内容换成自己的。",
+    "side": "left"
+  },
+  {
+    "page": "case-detail",
+    "target": "#remix-panel",
+    "title": "从这里做一份自己的",
+    "desc": "在“做同款”里写上你的产品或主题、想保留的风格和素材，再选应用继续。",
+    "tip": "这里只准备需求草稿，发送前还可以改。",
+    "side": "left",
+    "nextLabel": "继续看看怎么体验 →"
+  },
+  {
+    "page": "case-detail",
+    "target": "#recharge-entry",
+    "title": "先用一个小任务试试",
+    "desc": "想亲手做一份自己的？可以先选个小额体验，试着完成一件眼前的小事。左下角这里，可以查看和补充积分。",
+    "tip": "按自己的需要来，暂时不需要也可以先逛逛。",
+    "side": "right",
+    "nextLabel": "看看体验方式 →"
+  },
+  {
+    "page": "recharge",
+    "target": "#ratio",
+    "title": "按自己的节奏来就好",
+    "desc": "这里可以先看看不同金额对应的积分，再决定要不要继续。选多少，按自己的需要来。",
+    "tip": "具体任务会用多少积分，可以先看计费说明。",
+    "side": "bottom",
+    "nextLabel": "继续看看 →"
+  },
+  {
+    "page": "recharge",
+    "target": "#amount-grid",
+    "title": "先看清楚，再决定",
+    "desc": "点选金额后，页面会列出应付金额和预计到账积分。你可以先看一看，想好了再继续。",
+    "tip": "这次只是体验流程，不会产生真实付款。",
+    "side": "bottom",
+    "nextLabel": "我自己试试 →"
+  }
 ];
+
 function setGuideInert(on){['sidebar','main','demo-bar'].forEach(id=>$('#'+id).inert=on)}
 function startGuide(){savePortalStatus('started');caseFilter='全部案例';currentCase=0;custom=false;lastFocus=document.activeElement;$('#welcome').close();closeAction();step=0;$('#guide').style.display='block';setGuideInert(true);showStep()}
 function showStep(){const s=steps[step];render(s.page);$('#coach-title').textContent=s.title;$('#coach-desc').textContent=s.desc;$('#coach-tip').textContent=s.tip;$('#prev').disabled=step===0;$('#next').textContent=s.nextLabel||(step===steps.length-1?'开始体验 →':'下一步 →');$('#dots').innerHTML=steps.map((_,i)=>`<i class="${i===step?'current':''}"></i>`).join('');$('#progress').style.width=((step+1)/steps.length*100)+'%';$('.coach-label').innerHTML=`<span class="coach-brand-icon">${icon(s.page==='recharge'?'mine':s.page)}</span><span>认识万象百应<small>功能导览</small></span><span class="coach-count">${String(step+1).padStart(2,'0')} <i>/ ${String(steps.length).padStart(2,'0')}</i></span>`;$('#coach').setAttribute('aria-label',`第 ${step+1} 步，共 ${steps.length} 步`);const target=$(s.target);target.scrollIntoView({block:'center',behavior:'instant'});requestAnimationFrame(()=>{positionCoach();$('#coach').focus({preventScroll:true})})}
@@ -212,7 +308,7 @@ document.addEventListener('keydown',e=>{if($('#welcome').open&&(e.code==='Space'
 
 
 
-function activityPromo(){const s=WxCampaign.snapshot();return `<section class="recharge-banner"><a href="activity.html" class="campaign-banner-link" aria-label="9.9 元新手体验礼包，查看活动与任务"><img src="assets/activity/new-user-banner.png" width="2172" height="724" alt="万象百应 × 万象开工：9.9 元新手体验礼包，30 天体验，三个使用日任务。7 天内完成任务，15 天内领取奖励。活动方案演示。"></a><a class="campaign-banner-caption" href="activity.html"><span>${s.purchased?'已开通 · 继续查看新手任务':'9.9 元新人礼包 · 了解活动与任务'}</span><b>${s.purchased?'查看任务 →':'查看礼包 →'}</b></a></section>`}
+function activityPromo(){const s=WxCampaign.snapshot();return `<section class="recharge-banner"><a href="activity.html" class="new-offer-banner" aria-label="9.9元新手礼包，1000积分立即到账，任务再领500积分，应用30天使用权"><span>9.9元新手礼包</span><h2>先领1000积分，再做任务领500积分</h2><p>合计1500积分（15元） · 应用30天使用权</p><b>${s.purchased?'查看新手任务 →':'查看礼包与任务 →'}</b></a></section>`}
 function updateActivityBadge(){const s=WxCampaign.snapshot();$('#recharge-entry strong').textContent=s.balancePoints.toLocaleString();const b=$('#recharge-balance');if(b)b.textContent=s.balancePoints.toLocaleString()+' 示例积分';const h=$('#topup-history');if(h)h.innerHTML=topupHistory();}
 addEventListener('wx-campaign-change',updateActivityBadge);
 
@@ -249,7 +345,7 @@ $('#welcome').addEventListener('close',()=>clearTimeout(introTimer));
 
 window.addEventListener('resize',positionCoach);window.addEventListener('scroll',positionCoach,{passive:true});initPortal();
 
-function showRequestedTask(){const u=new URL(location.href),id=u.searchParams.get('taskGuide');if(!['app','case'].includes(id))return;u.searchParams.delete('taskGuide');window.history.replaceState(null,'',u.pathname+u.search+u.hash);if(id==='app')showAction('从这里打开万象开工','先看当前订阅和下载状态。',downloaded?'已演示完成下载。点击右侧“打开应用”，进入开工后才会完成任务。':subscribed?'已订阅。选择 Windows 或 Mac 模拟下载，查看安装说明，再打开应用。':'点击右侧“订阅应用”，再选择系统下载，最后打开应用。这里只模拟流程，不会付款或下载真实安装包。','开始操作',()=>{closeAction();const t=document.querySelector(downloaded?'#open-app-button':subscribed?'[data-download]':'#subscribe-button');t?.scrollIntoView({block:'center',behavior:'instant'});t?.focus({preventScroll:true})});else showAction('选一个案例，打开详情','看过一次作品详情即可记录这项任务。','选择你感兴趣的案例卡片。看完详情后，可从左侧“礼包”返回任务页领取积分。','去选案例',()=>{closeAction();document.querySelector('[data-case]')?.focus()});}
+function showRequestedTask(){const u=new URL(location.href),id=u.searchParams.get('taskGuide');if(!['app','case'].includes(id))return;u.searchParams.delete('taskGuide');window.history.replaceState(null,'',u.pathname+u.search+u.hash);if(id==='app')showAction('从这里打开万象开工','先看当前订阅和下载状态。',downloaded?'已演示完成下载。点击右侧“打开应用”，进入开工后才会完成任务。':subscribed?'已订阅。选择 Windows 或 Mac 模拟下载，查看安装说明，再打开应用。':'点击右侧“订阅应用”，再选择系统下载，最后打开应用。这里只模拟流程，不会付款或下载真实安装包。','开始操作',()=>{closeAction();const t=document.querySelector(downloaded?'#open-app-button':subscribed?'[data-download]':'#subscribe-button');t?.scrollIntoView({block:'center',behavior:'instant'});t?.focus({preventScroll:true})});else showAction('看一个案例，再点一次赞','查看和点赞都完成后，才记录这项任务。','选择感兴趣的案例，打开详情，再点击“点赞”。完成后可从左侧“礼包”返回领取积分。','去选案例',()=>{closeAction();document.querySelector('[data-case]')?.focus()});}
 showRequestedTask();
 </script>
-<script src="assets/activity/reminders.js"></script><script src="assets/activity/demo-controls.js"></script></body></html>
+<script src="assets/activity/starter-panel.js"></script><script src="assets/activity/reminders.js"></script><script src="assets/activity/demo-controls.js"></script></body></html>
