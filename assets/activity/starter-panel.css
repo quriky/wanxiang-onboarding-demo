@@ -1,1 +1,83 @@
-#wx-starter-panel[hidden]{display:none!important}#wx-starter-panel{position:fixed;z-index:80;background:#fff;border:1px solid #e3e7e8;border-radius:15px;box-shadow:0 8px 36px #26314325;overflow:auto;color:#38414c;font:13px/1.6 "Microsoft YaHei",Arial,sans-serif;outline:none;overscroll-behavior:contain}#wx-starter-panel *{box-sizing:border-box}#wx-starter-panel button{font-family:inherit;cursor:pointer}#wx-starter-panel button:disabled{cursor:default;opacity:.45}#wx-starter-panel button:focus-visible,#wx-starter-panel summary:focus-visible{outline:2px solid #8ab8a0;outline-offset:2px}.wx-starter-heading{padding:21px 21px 16px;display:flex;align-items:flex-start;gap:12px;justify-content:space-between;border-bottom:1px solid #f2f3f3}.wx-starter-heading h2{font-size:17px;margin:0 0 5px;color:#2e343a;line-height:1.6}.wx-starter-heading p{margin:0;color:#979ea5;font-size:12px}.wx-starter-close{border:0;background:transparent;color:#9da4ad;font-size:22px;line-height:1.1;padding:1px 0 2px 8px}.wx-starter-content{padding:0 21px 13px}.wx-starter-offer{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 0;color:#697887;font-size:12px}.wx-starter-offer small{display:block;font-size:10px;color:#9ba4ac;margin-top:2px}.wx-starter-offer>b{font-size:11px;color:#5b9379;font-weight:400}.wx-starter-offer button{background:#f2f8f4;border:1px solid #dfeee4;border-radius:6px;color:#4c8d6c;padding:5px 10px;font-size:11px;white-space:nowrap}.wx-starter-progress-caption{display:flex;justify-content:space-between;font-size:11px;color:#979ea5;margin-top:4px}.wx-starter-progress-caption b{font-weight:400}#wx-starter-panel progress{display:block;width:100%;height:4px;appearance:none;border:0;border-radius:4px;overflow:hidden;background:#eff1ef;margin:11px 0 8px}#wx-starter-panel progress::-webkit-progress-bar{background:#eff1ef}#wx-starter-panel progress::-webkit-progress-value{background:#62b28b}#wx-starter-panel progress::-moz-progress-bar{background:#62b28b}.wx-starter-done-count{font-size:10px;color:#a3aab0;margin-bottom:9px}.wx-starter-groups>details{border-top:1px solid #f0f2f2}.wx-starter-groups summary{display:flex;align-items:center;gap:12px;padding:16px 0;list-style:none;cursor:pointer}.wx-starter-groups summary::-webkit-details-marker{display:none}.wx-starter-groups summary>span{flex:1;font-size:13px;color:#454d56}.wx-starter-groups summary>small{font-size:11px;color:#99a0a8;white-space:nowrap}.wx-starter-groups summary>i{width:6px;height:6px;border-right:1px solid #a0a7af;border-bottom:1px solid #a0a7af;transform:rotate(45deg);margin:-3px 2px 0 0}.wx-starter-groups details[open]>summary>i{transform:rotate(225deg);margin-top:4px}.wx-starter-row{display:grid;grid-template-columns:15px minmax(0,1fr) 39px 51px;gap:8px;align-items:center;padding:10px 0 12px}.wx-starter-check{display:grid;place-items:center;width:13px;height:13px;border:1px solid #cdd4d3;border-radius:50%;font-size:9px;color:#5c9c7c}.wx-starter-check.done{background:#f0f8f2;border-color:#c3decd}.wx-starter-task-name{font-size:12px;line-height:1.8;color:#606a75}.wx-starter-task-name small{display:block;font-size:10px;color:#6a9d81}.wx-starter-points{font-size:13px;text-align:right;font-weight:500;color:#41a57a}.wx-starter-points.muted{color:#a4b0aa}.wx-starter-claim,.wx-starter-do{font-size:10px;padding:5px 7px;white-space:nowrap;border-radius:5px;background:#fff;border:1px solid #e4e9e5;color:#7a8b82}.wx-starter-claim{background:#4ba47b;border-color:#4ba47b;color:#fff}.wx-starter-claimed{font-size:10px;color:#a0aaa4;white-space:nowrap;text-align:right}.wx-starter-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid #edf1ee;padding:14px 0 4px;margin:6px 0 0;color:#909a95;font-size:11px}.wx-starter-footer b{font-size:15px;font-weight:500;color:#489772;margin:0 3px}.wx-starter-primary{background:#499e78;border:1px solid #499e78;color:#fff;font-size:11px;padding:7px 12px;border-radius:6px}.wx-starter-rules{font-size:10px;color:#9ca5a1;margin-top:9px}.wx-starter-rules summary{cursor:pointer;font-size:10px}.wx-starter-rules p{font-size:11px;line-height:1.9;margin:8px 0;color:#8b9690}.wx-starter-purchase,.wx-starter-guide{padding:12px 0 8px}.wx-starter-back{font-size:11px;border:0;background:none;color:#929d97;padding:0;margin-bottom:17px}.wx-starter-purchase h3,.wx-starter-guide h3{font-size:16px;margin:0 0 14px;color:#454e48}.wx-starter-price{font-size:29px;font-weight:600;color:#438863;margin:12px 0}.wx-starter-purchase ul,.wx-starter-guide ol{font-size:13px;color:#737e78;padding-left:19px;line-height:2.3;margin:16px 0}.wx-starter-purchase p,.wx-starter-guide p{font-size:11px;color:#9ba49f;line-height:1.9;margin:13px 0}.wx-starter-wide{display:block;width:100%;font-size:12px;padding:10px}.wx-starter-launch{position:absolute;left:3px;top:678px;width:70px;height:60px;z-index:24;border:1px solid #e0ece3;border-radius:9px;background:#eff7f1;color:#4b8b69;font:11px/1.6 "Microsoft YaHei",Arial,sans-serif;padding:8px 2px;cursor:pointer}.wx-starter-launch span{display:block}.wx-starter-launch small{display:block;font-size:9px;color:#86a58f;margin-top:4px}@media(max-width:480px){.wx-starter-heading{padding:18px 17px 13px}.wx-starter-heading h2{font-size:16px}.wx-starter-content{padding:0 17px 12px}.wx-starter-row{grid-template-columns:13px minmax(0,1fr) 35px 49px;gap:7px}.wx-starter-task-name{font-size:12px}}
+﻿#wx-starter-panel[hidden]{display:none!important}
+#wx-starter-panel{position:fixed;z-index:80;background:#fff;border:1px solid #ebeeec;border-radius:14px;box-shadow:0 3px 14px #25392e16,0 1px 3px #25392e0b;overflow:auto;scrollbar-width:thin;color:#343a38;font:13px/1.6 "Microsoft YaHei",Arial,sans-serif;outline:none;overscroll-behavior:contain}
+#wx-starter-panel *{box-sizing:border-box}
+#wx-starter-panel button{font:inherit;cursor:pointer}
+#wx-starter-panel button:focus-visible,#wx-starter-panel summary:focus-visible,#wx-starter-panel [tabindex]:focus-visible{outline:2px solid #51b492;outline-offset:3px;border-radius:4px}
+.wx-starter-heading{padding:22px 20px 0;display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.wx-starter-heading h2{font-size:17px;font-weight:600;margin:0 0 5px;color:#242b28;line-height:1.5}
+.wx-starter-heading p{font-size:12px;color:#959d97;margin:0}
+.wx-starter-close{border:0;background:none;color:#a3aaa5;font-size:22px!important;line-height:1;padding:0 1px 4px 8px}
+.wx-starter-content{padding:0 20px 12px}
+.wx-starter-offer{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 0 14px;color:#a1a7a3;font-size:10px}
+.wx-starter-offer button{border:0;background:none;color:#469a79;font-size:11px!important;padding:2px 0 2px 8px;white-space:nowrap}
+.wx-starter-offer button span{margin-left:4px}.wx-starter-base-paid{color:#76a28d}
+.wx-starter-progress{position:relative;background:#eff1f0;height:4px;border-radius:3px;overflow:hidden}
+.wx-starter-progress progress{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.wx-starter-progress-fill{display:block;width:100%;height:100%;background:#25b78e;transform-origin:left;border-radius:3px}
+.wx-starter-progress-caption{display:flex;justify-content:space-between;font-size:11px;color:#979f99;margin:7px 0 15px}
+.wx-starter-groups summary{display:flex;align-items:center;gap:11px;padding:16px 0;list-style:none;cursor:pointer;user-select:none}
+.wx-starter-groups summary::-webkit-details-marker{display:none}
+.wx-starter-groups summary>span{flex:1;font-size:14px;color:#3c4440}
+.wx-starter-groups summary>small{font-size:11px;color:#919b94;font-weight:400;white-space:nowrap}
+.wx-starter-groups summary>i{width:6px;height:6px;border-right:1px solid #a1aaa4;border-bottom:1px solid #a1aaa4;transform:rotate(45deg);margin:-3px 2px 0 0;transition:transform 200ms ease}
+.wx-starter-groups details[open]>summary>i{transform:rotate(225deg);margin-top:3px}
+.wx-starter-group-items{overflow:hidden}
+.wx-starter-row{display:grid;grid-template-columns:14px minmax(0,1fr) auto;gap:9px;align-items:center;padding:9px 0 10px;width:100%;text-align:left;border:0;background:none;border-radius:5px;color:inherit;transition:background 140ms ease}
+button.wx-starter-row:hover{background:#f5faf7}
+.wx-starter-check{display:grid;place-items:center;width:13px;height:13px;border:1px solid #c7cec9;border-radius:50%;font-size:9px;color:#25a47c}
+.wx-starter-check.done{border-color:#4cb794;background:#f3faf6}
+.wx-starter-task-name{font-size:13px;line-height:1.8;color:#555e58;min-width:0}
+.wx-starter-points{font-size:12px;color:#0bb58b;font-weight:500;white-space:nowrap;text-align:right}
+.wx-starter-row.is-claimed .wx-starter-task-name{color:#a0a8a2}.wx-starter-row.is-claimed .wx-starter-points{font-size:10px;font-weight:400;color:#9ead9f}
+.wx-starter-row.is-ready .wx-starter-check{color:#04a77e;border-color:#04a77e}
+.wx-starter-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;padding:10px 0 0;font-size:11px;color:#7e8f83}
+.wx-starter-primary{background:#11b48b;border:1px solid #11b48b;color:#fff;font-size:11px!important;font-weight:500;border-radius:7px;padding:7px 12px;transition:background 140ms ease,transform 140ms ease}
+.wx-starter-primary:hover{background:#08a57e}.wx-starter-primary:active{transform:scale(.98)}
+.wx-starter-feedback{font-size:11px;color:#0a9c74;margin:13px 0 0;text-align:center}
+.wx-starter-rules{font-size:10px;color:#afb5b0;margin-top:13px}
+.wx-starter-rules summary{cursor:pointer}.wx-starter-rules p{font-size:11px;line-height:1.9;color:#8e9991;margin:10px 0}
+.wx-starter-purchase,.wx-starter-guide{padding:14px 0 8px}
+.wx-starter-back{font-size:11px!important;border:0;background:none;color:#94a197;padding:0;margin-bottom:20px}
+.wx-starter-purchase h3,.wx-starter-guide h3{font-size:15px;font-weight:500;margin:0 0 14px;color:#39453d}
+.wx-starter-purchase ul,.wx-starter-guide ol{font-size:12px;color:#7d8980;padding-left:18px;line-height:2.3;margin:15px 0 18px}
+.wx-starter-purchase p,.wx-starter-guide p{font-size:11px;color:#a2aaa4;line-height:1.9;margin:13px 0}
+.wx-starter-wide{display:block;width:100%;font-size:12px!important;padding:9px}
+.wx-starter-sr-only{position:fixed;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.wx-starter-launch{position:absolute;left:3px;top:678px;width:70px;height:60px;z-index:24;border:1px solid #deeee4;border-radius:9px;background:linear-gradient(135deg,#f9f7e9,#e8f7ef);color:#428568;font:11px/1.6 "Microsoft YaHei",Arial,sans-serif;padding:8px 2px;cursor:pointer;transition:box-shadow 180ms ease,transform 180ms ease}
+.wx-starter-launch:hover{box-shadow:0 3px 9px #6a9e7d20;transform:translateY(-1px)}
+.wx-starter-launch span{display:block}.wx-starter-launch small{display:block;font-size:9px;color:#8ba88f;margin-top:4px}
+#activity-rail-entry{color:#43896a!important;background:linear-gradient(135deg,#faf8ec,#eaf7ef);border-radius:9px}
+@media(max-width:480px){.wx-starter-heading{padding:20px 18px 0}.wx-starter-heading h2{font-size:16px}.wx-starter-content{padding:0 18px 12px}.wx-starter-row{gap:8px}.wx-starter-task-name{font-size:12px}.wx-starter-groups summary>span{font-size:12px}}
+@media(prefers-reduced-motion:reduce){#wx-starter-panel *,#activity-rail-entry,.wx-starter-launch{transition:none!important;animation:none!important}}
+
+/* V24: a real image card and a small, non-blocking location hint. */
+.wx-starter-heading{display:block;position:relative;padding:16px 16px 0}
+.wx-starter-offer-image{display:block;width:100%;height:auto;border-radius:10px}
+.wx-starter-heading .wx-starter-close{position:absolute;right:20px;top:20px;width:23px;height:23px;padding:0;border-radius:50%;background:#ffffffb3;color:#759580;font-size:18px!important;text-align:center;line-height:22px}
+@media(max-width:480px){.wx-starter-heading{padding:14px 14px 0}.wx-starter-heading .wx-starter-close{right:18px;top:18px}}
+
+/* V26: completed tasks stay visible; keep the reward amount in every state. */
+.wx-starter-check.done,.wx-starter-row.is-ready .wx-starter-check{background:#0bb58b;border-color:#0bb58b;color:#fff;font-weight:700}
+.wx-starter-row.is-done .wx-starter-task-name{color:#8b9690;text-decoration:line-through;text-decoration-thickness:1px;text-decoration-color:#a1aaa5}
+.wx-starter-points,.wx-starter-row.is-claimed .wx-starter-points{display:flex;flex-direction:column;align-items:flex-end;gap:1px;min-width:58px;color:#009b75;line-height:1.4;font-size:15px;font-weight:700;font-variant-numeric:tabular-nums}
+.wx-starter-points strong{font-size:15px;font-weight:700;letter-spacing:.2px}
+.wx-starter-points small{font-size:10px;font-weight:400;color:#84948b}
+.wx-starter-row.is-ready .wx-starter-points small{color:#008d6b;font-weight:500}
+.wx-starter-row.is-claimed .wx-starter-points strong{color:#70b69e;text-decoration:line-through;text-decoration-thickness:1px}
+
+/* V36: one recommended experience, with the remaining tasks a click away. */
+.wx-starter-recommended{background:#f5faf7;border:1px solid #e3eee7;border-radius:10px;padding:13px 14px 14px;margin:2px 0 8px}
+.wx-starter-recommend-top{display:flex;align-items:center;justify-content:space-between;font-size:10px;color:#789386;line-height:1.4}
+.wx-starter-recommend-top strong{font-size:18px;color:#009b75;font-weight:700}.wx-starter-recommend-top small{font-size:10px;font-weight:400;margin-left:3px}
+.wx-starter-recommended h3{font-size:14px;font-weight:600;color:#36493e;margin:7px 0 5px;line-height:1.65}
+.wx-starter-recommended p{font-size:11px;color:#839187;line-height:1.8;margin:0 0 10px}
+.wx-starter-recommended .wx-starter-primary{padding:6px 12px}
+.wx-starter-more>summary{display:flex;align-items:center;gap:10px;padding:13px 0 10px;list-style:none;cursor:pointer;color:#596b5f;font-size:12px}
+.wx-starter-more>summary::-webkit-details-marker{display:none}.wx-starter-more>summary>span{flex:1}.wx-starter-more>summary>small{font-size:10px;color:#9ba69f}
+.wx-starter-more>summary>i{width:6px;height:6px;border-right:1px solid #98a59d;border-bottom:1px solid #98a59d;transform:rotate(45deg);margin:0 3px 4px 0}.wx-starter-more[open]>summary>i{transform:rotate(225deg);margin-top:5px}
+.wx-starter-all-done{padding:22px 0 14px;color:#07966f;text-align:center;font-weight:600}
+.wx-starter-feedback{margin:2px 0 10px}
+#wx-task-bar.wx-task-reward{border-color:#dce9e0;color:#527760;align-items:center}
+#wx-task-bar #wx-task-claim{font:11px/1.4 "Microsoft YaHei",sans-serif;padding:7px 9px;border-radius:6px;background:#11b48b;color:#fff;white-space:nowrap}
+#wx-task-bar #wx-task-claim[hidden],#wx-task-return[hidden]{display:none!important}
+#wx-task-bar #wx-task-claim:hover{background:#08a57e}

@@ -1,0 +1,4 @@
+.x34-guide-dot{position:absolute;width:8px;height:8px;border:0;padding:0;border-radius:50%;background:#f05d68;box-shadow:0 0 0 2px #fff;z-index:8;cursor:pointer}
+.x34-guide-dot:before{content:'';position:absolute;inset:-7px;border-radius:50%}
+.x34-guide-dot[hidden]{display:none!important}
+.x34-guide-dot:focus-visible{outline:2px solid #8c7dca;outline-offset:4px}

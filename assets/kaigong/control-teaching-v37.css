@@ -1,0 +1,5 @@
+/* Emphasize the two product concepts without enlarging every guide. */
+.x37-skills-message{position:absolute;left:180px;top:17px;width:900px;height:39px;margin:0;padding:2px 0;background:#f7f8fa;color:#262b36;font:700 24px/1.4 "Microsoft YaHei",sans-serif;z-index:3;pointer-events:none}
+.x24-phone-heading{width:1325px;height:54px;top:340px;padding:7px 0;font-size:30px;font-weight:700}
+.x29-short-intro #hint-card[data-emphasis="true"] h2{font-size:22px;line-height:1.45;color:#272b39}
+.x29-short-intro #hint-card[data-emphasis="true"] p{font-size:13px;line-height:1.9}

@@ -5,12 +5,12 @@ const RESET_KEYS=[KEY,'wx-kaigong-welcome-v22','wx-kaigong-team-v22','wx-unified
 function readEpoch(){try{return Number(localStorage.getItem(RESET_KEY))||0}catch{return 0}}
 function clearForReset(epoch){try{for(const key of RESET_KEYS)localStorage.removeItem(key);localStorage.setItem(RESET_KEY,String(epoch))}catch{}}
 const TASKS=[
- {id:'remix',stage:1,title:'做一次同款',description:'挑选案例，点击做同款，把需求带入输入框。',points:100,route:'remix'},
- {id:'hire',stage:1,title:'新建一个数字员工，并对话一次',description:'在人才市场录用一位数字员工，再给它发送一项任务。',points:100,route:'market'},
+ {id:'remix',stage:1,title:'复刻一个同款作品',description:'挑选案例，点击做同款，把需求带入输入框。',points:100,route:'remix'},
+ {id:'hire',stage:1,title:'录用一个数字员工，并对话一次',description:'在人才市场选择任意数字员工，确认录用后发送一次消息。',points:100,route:'market'},
  {id:'automation',stage:1,title:'配置一条定时任务',description:'写清工作和时间，核对草稿后保存。',points:100,route:'automation'},
  {id:'phone',stage:1,title:'关联微信',description:'进入链接手机，完成一次微信关联演示。',points:80,route:'phone'},
  {id:'case',stage:1,title:'看一个案例，点一次赞',description:'打开案例详情，再点击点赞。',points:50,route:'cases'},
- {id:'project',stage:1,title:'创建一个项目，并对话一次',description:'给项目起名，再在项目里发送一项工作需求。',points:70,route:'project'}
+ {id:'project',stage:1,title:'创建一个项目，并加入一名数字员工',description:'创建项目后，勾选至少一名数字员工，确认添加到项目。',points:70,route:'project'}
 ];
 const OFFER={id:2,price:9.9,basePoints:1000,taskPoints:500,totalPoints:1500,rightsDays:30,duration:null};
 function today(){return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date())}
@@ -40,7 +40,7 @@ function claim(ids){const s=load();sync(s);const v={...s,currentDay:day(s),uses:
 function claimAll(){return claim(TASKS.map(t=>t.id))}
 function simulateDay(n){const s=load();if(!s.purchased||!Number.isInteger(n)||n<day(s)||n>31)return false;s.demoDay=n;sync(s);save(s);return true}
 function simulateAll(){let n=0;for(const t of TASKS)if(!t.auto&&complete(t.id,'control'))n++;return n}
-function record(event){const s=load();if(!s.purchased)return;const direct={remix:'remix','phone-linked':'phone',automation:'automation'};if(direct[event]){complete(direct[event],'page-event');return}const allowed=['hired','employee-reply','case','case-like','project-created','project-reply'];if(!allowed.includes(event))return;s.flags[event]=true;save(s);if(s.flags.hired&&s.flags['employee-reply'])complete('hire','page-event');if(s.flags.case&&s.flags['case-like'])complete('case','page-event');if(s.flags['project-created']&&s.flags['project-reply'])complete('project','page-event')}
+function record(event,employeeId){const s=load();if(!s.purchased)return;const direct={remix:'remix','phone-linked':'phone',automation:'automation'};if(direct[event]){complete(direct[event],'page-event');return}const allowed=['hired','employee-reply','created','created-reply','case','case-like','project-created','project-reply','project-member-added'];if(!allowed.includes(event))return;s.flags[event]=true;if(event==='project-created'&&typeof employeeId==='string')s.flags.projectCreatedId=employeeId;if(event==='hired'&&typeof employeeId==='string'){const hires=s.flags.marketHires&&typeof s.flags.marketHires==='object'?s.flags.marketHires:{};hires[employeeId]=true;s.flags.marketHires=hires}save(s);if(event==='employee-reply'&&typeof employeeId==='string'&&s.flags.marketHires?.[employeeId])complete('hire','page-event');if(s.flags.case&&s.flags['case-like'])complete('case','page-event');if(event==='project-member-added'&&employeeId&&s.flags['project-created']&&typeof employeeId.projectId==='string'&&employeeId.projectId.length>0&&employeeId.projectId===s.flags.projectCreatedId&&Array.isArray(employeeId.members)&&employeeId.members.length>0)complete('project','page-event')}
 function reset(){const s=load();save({...empty(),resetEpoch:s.resetEpoch||readEpoch(),topups:s.topups||[]})}
 function recharge(amount,id){const s=load();if(!Number.isInteger(amount)||amount<10||amount>1000000||typeof id!=='string'||!id||id.length>100)return {ok:false,points:0};s.topups=s.topups||[];if(s.topups.some(t=>t.id===id))return {ok:true,duplicate:true,points:0};const entry={id,amount,points:amount*100,at:Date.now()};s.topups.push(entry);save(s);return {ok:true,points:entry.points}}
 function acceptReset(epoch){if(resetting||!Number.isInteger(epoch)||epoch<readEpoch())return;resetting=true;clearForReset(epoch);fallback=empty(epoch);save(fallback);window.dispatchEvent(new CustomEvent('wx-demo-reset',{detail:{epoch}}))}
@@ -48,10 +48,10 @@ function resetAll(){const epoch=Math.max(Date.now(),readEpoch()+1);acceptReset(e
 try{resetChannel=new BroadcastChannel('wx-unified-demo-reset-v1');resetChannel.onmessage=e=>acceptReset(Number(e.data?.epoch))}catch{}
 addEventListener('storage',e=>{if(e.key===RESET_KEY&&Number(e.newValue)>0)acceptReset(Number(e.newValue))});
 function decorateUrl(href){const u=new URL(href,location.href),h=new URLSearchParams(u.hash.slice(1));h.set('campaign',JSON.stringify(load()));u.hash=h.toString();return u.href}
-function reminder(){const s=snapshot();if(!s.purchased)return {key:'offer-1500',title:'9.9元，先领1000积分开始用',text:'开通立即到账1000积分，完成6项新手任务再领500积分，合计1500积分，并享30天应用使用权。',cta:'查看新手礼包',stage:1};const ready=TASKS.filter(t=>status(t,s)==='claimable'),points=ready.reduce((n,t)=>n+t.points,0);if(!points&&TASKS.every(t=>s.claimed[t.id]))return null;return {key:'paid-1500:'+s.start+':'+s.currentDay,title:points?'你有新手积分待领取':'再试一项，领一份新手积分',text:points?'已有'+points+'积分可以领取，返回任务页手动领取即可。':'从做同款、数字员工对话等6项任务里挑一项，完成后分别领取奖励，合计可领500积分。',cta:points?'去领取积分':'继续新手任务',stage:1}}
+function reminder(){const s=snapshot();if(!s.purchased)return {key:'offer-1500',title:'9.9元，先领1000积分开始用',text:'开通立即到账1000积分，完成6项新手任务再领500积分，合计1500积分，并享30天应用使用权。',cta:'查看新手礼包',stage:1};const ready=TASKS.filter(t=>status(t,s)==='claimable'),points=ready.reduce((n,t)=>n+t.points,0);if(!points&&TASKS.every(t=>s.claimed[t.id]))return null;return {key:'paid-1500:'+s.start+':'+s.currentDay,title:points?'你有新手积分待领取':'再试一项，领一份新手积分',text:points?'已有'+points+'积分可以领取，打开新手任务手动领取即可。':'从做同款、数字员工对话等6项任务里挑一项，完成后分别领取奖励，合计可领500积分。',cta:points?'去领取积分':'继续新手任务',stage:1}}
 function reminderSeen(){const n=reminder();return !n||!!(load().noticeSeen||{})[n.key]}
 function ackReminder(){const n=reminder();if(!n)return;const s=load();s.noticeSeen={...(s.noticeSeen||{}),[n.key]:true};save(s)}
 window.WxCampaign={recharge,resetAll,get resetting(){return resetting},offer:OFFER,reminder,reminderSeen,ackReminder,tasks:TASKS,snapshot,status,purchase,complete,claim,claimAll,simulateDay,simulateAll,record,reset,touch,decorateUrl,key:KEY};
-document.addEventListener('click',e=>{const a=e.target.closest('a[href]');if(!a)return;try{const u=new URL(a.href,location.href);if(u.origin===location.origin&&/\/(index|kaigong|activity)\.html$/.test(u.pathname))a.href=decorateUrl(a.href)}catch{}},true);
+document.addEventListener('click',e=>{const a=e.target.closest('a[href]');if(!a)return;try{const u=new URL(a.href,location.href);if(u.origin===location.origin&&/\/(index|baiying|kaigong|activity)\.html$/.test(u.pathname))a.href=decorateUrl(a.href)}catch{}},true);
 touch();
 })();

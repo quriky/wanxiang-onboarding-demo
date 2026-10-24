@@ -1,10 +1,10 @@
-(function(){
+﻿(function(){
 'use strict';
-const C=window.WxCampaign,$=s=>document.querySelector(s);let timer,pendingTask=null;
+const C=window.WxCampaign,$=s=>document.querySelector(s);let timer;
 function toast(message){clearTimeout(timer);$('#toast').textContent=message;$('#toast').style.display='block';timer=setTimeout(()=>$('#toast').style.display='none',3400)}
-const taskGroups=[{id:'start',title:'初识万象开工',ids:['remix','hire']},{id:'routine',title:'让工作按你的安排进行',ids:['automation','phone']},{id:'organize',title:'留下灵感与工作成果',ids:['case','project']}];
-let activeGroup='start';
-function taskHTML(t,s){const k=C.status(t,s),done=!!s.completed[t.id];return `<div class="task-row" data-task="${t.id}"><span class="task-state-icon ${done?'complete':''}">${done?'✓':''}</span><div class="task-info"><h4>${t.title}</h4><p>${t.description}</p>${k==='claimable'?'<span class="task-status claimable">已完成，待领取</span>':''}</div><span class="task-points ${k==='claimed'?'already-claimed':''}">+${t.points}</span><div class="task-actions">${k==='claimable'?`<button class="btn primary" data-claim="${t.id}">领取</button>`:k==='claimed'?'<span class="disabled-label">已领取</span>':s.purchased?`<button class="btn outline" data-route="${t.route}" data-task-guide="${t.id}">去完成</button><button class="simulate-task" data-complete="${t.id}">模拟完成</button>`:'<span class="disabled-label">待开通</span>'}</div></div>`}
+const taskGroups=[{id:'start',title:'初识万象开工',ids:['remix','hire']},{id:'routine',title:'安排日常工作',ids:['automation','phone']},{id:'organize',title:'探索更多用法',ids:['case','project']}];
+let activeGroup=null;
+function taskHTML(t,s){const k=C.status(t,s),done=!!s.completed[t.id];return `<div class="task-row ${done?'is-done':''}" data-task="${t.id}"><span class="task-state-icon ${done?'complete':''}">${done?'✓':''}</span><div class="task-info"><h4>${t.title}</h4><p>${t.description}</p>${k==='claimable'?'<span class="task-status claimable">已完成，待领取</span>':''}</div><span class="task-points ${k==='claimed'?'already-claimed':''}">+${t.points}</span><div class="task-actions">${k==='claimable'?`<button class="btn primary" data-claim="${t.id}">领取</button>`:k==='claimed'?'<span class="disabled-label">已领取</span>':s.purchased?`<button class="btn outline" data-route="${t.route}" data-task-guide="${t.id}">去完成</button><button class="simulate-task" data-complete="${t.id}">模拟完成</button>`:'<span class="disabled-label">待开通</span>'}</div></div>`}
 function render(){const s=C.snapshot(),ready=C.tasks.filter(t=>C.status(t,s)==='claimable'),available=ready.reduce((n,t)=>n+t.points,0),done=C.tasks.filter(t=>s.completed[t.id]).length;
 $('#buy').textContent=s.purchased?'已开通 · 查看权益':'9.9元，模拟开通';$('#offer-status').textContent=s.purchased?`应用使用权至 ${s.rightsDeadline} 23:59（演示）`:'开通后，1000积分立即到账。';
 $('#earned-task-points').textContent=s.claimedPoints;$('#task-total-points').textContent=C.offer.taskPoints;$('#task-reward-progress').value=s.claimedPoints;$('#task-reward-progress').max=C.offer.taskPoints;$('#task-reward-progress').setAttribute('aria-valuetext',`已领取${s.claimedPoints}积分，共${C.offer.taskPoints}积分`);$('#task-progress').textContent=done+' / 6 已完成';
@@ -22,14 +22,13 @@ $('#claim-all').onclick=$('#sticky-claim').onclick=batch;$('#change-day').onclic
 $('#reset').onclick=()=>$('#reset-dialog').showModal();$('#cancel-reset').onclick=()=>$('#reset-dialog').close();$('#confirm-reset').onclick=()=>{C.reset();$('#reset-dialog').close();toast('活动已重置，充值积分和教学进度保留。')};
 document.addEventListener('click',e=>{const claim=e.target.closest('[data-claim]'),complete=e.target.closest('[data-complete]'),route=e.target.closest('[data-route]');if(claim){const r=C.claim([claim.dataset.claim]);toast(r.points?`已模拟领取${r.points}积分。`:'这项奖励还不能领取，或已经领取。')}if(complete)toast(C.complete(complete.dataset.complete)?'已记录模拟完成，返回领取即可。':'当前不能新增进度。');if(route)openTaskGuide(route.dataset.taskGuide)});
 const guides={
-remix:{title:'挑一个案例，试试做同款',intro:'点击做同款，把需求带入输入框，即可记录这项任务。',steps:['进入开工的产品宣传图案例。','看过效果，点击“做同款”。','需求会填入输入框；可以先修改，发送由你决定。'],note:'不要求实际生成作品，不会自动发送。',label:'去做同款',url:'kaigong.html?taskGuide=remix'},
-hire:{title:'新建一个数字员工，并对话一次',intro:'在开工里，“录用”就是把数字员工加入你的团队。',steps:['在人才市场查看一位数字员工的能力。','点击录用并确认工位。','进入它的对话，输入一件工作需求并模拟发送。'],note:'只看档案不会完成任务；需要录用和一次对话。',label:'去人才市场',url:'kaigong.html?taskGuide=hire'},
-automation:{title:'配置一条定时任务',intro:'选一个常用示例，或写自己的工作安排。',steps:['点击新建定时任务，写清内容和时间。','发送需求，检查生成的草稿。','确认后保存，再返回任务页领取。'],note:'只生成草稿不会完成任务；保存后才记录。',label:'去配置任务',url:'kaigong.html?taskGuide=automation'},
-phone:{title:'让微信也能交代工作',intro:'关联后，可以在微信给数字员工交代任务。',steps:['打开“链接手机”，找到微信卡片。','点击关联微信，确认关联演示。','返回任务页领取积分。'],note:'本地演示不会连接真实微信，引用资料不能代替这项任务。',label:'去关联微信',url:'kaigong.html?taskGuide=phone'},
-case:{title:'看看一个案例，给喜欢的作品点赞',intro:'查看和点赞都完成后，才记录这项任务。',steps:['从案例列表选择一个作品。','打开详情，看看效果与做法。','点击“点赞”，再返回任务页领取。'],note:'只打开案例不会完成点赞任务。',label:'去看案例',url:'index.html?activityRoute=cases&taskGuide=case'},
-project:{title:'建一个项目，聊一件正在做的事',intro:'用项目把同一项工作的讨论放在一起。',steps:['点击对话标题旁的＋，选择创建项目。','填写项目名称，确认创建。','在项目里输入一项工作需求，模拟发送一次。'],note:'只创建项目还不算完成，需要在项目里对话一次。',label:'去创建项目',url:'kaigong.html?taskGuide=project'}
+remix:{title:'复刻一个同款作品',intro:'点击做同款，把需求带入输入框，即可记录这项任务。',steps:['进入开工的产品宣传图案例。','看过效果，点击“做同款”。','需求会填入输入框；可以先修改，发送由你决定。'],note:'不要求实际生成作品，不会自动发送。',label:'去做同款',url:'kaigong.html?taskGuide=remix'},
+hire:{title:'录用一个数字员工，并对话一次',intro:'在人才市场选择适合自己工作的数字员工。',steps:['任选一位数字员工，点击录用。','核对信息，确认录用并去对话。','问候语会逐字填入，由你点击发送。'],note:'录用后实际发送一次消息，才可领取100积分。',label:'逛人才市场',url:'kaigong.html?taskGuide=hire'},
+automation:{title:'配置一条定时任务',intro:'选一个常用示例，或写自己的工作安排。',steps:['点击新建定时任务，写清内容和时间。','发送需求，检查生成的草稿。','确认后保存，再打开新手任务领取。'],note:'只生成草稿不会完成任务；保存后才记录。',label:'去配置任务',url:'kaigong.html?taskGuide=automation'},
+phone:{title:'让微信也能交代工作',intro:'关联后，可以在微信给数字员工交代任务。',steps:['打开“链接手机”，找到微信卡片。','点击关联微信，确认关联演示。','打开新手任务领取积分。'],note:'本地演示不会连接真实微信，引用资料不能代替这项任务。',label:'去关联微信',url:'kaigong.html?taskGuide=phone'},
+case:{title:'看看一个案例，给喜欢的作品点赞',intro:'暂时前往百应案例，查看并点赞后返回开工领取。',steps:['从案例列表选择一个作品。','打开详情，看看效果与做法。','点击“点赞”，再打开新手任务领取。'],note:'只打开案例不会完成点赞任务。',label:'去看案例',url:'baiying.html?activityRoute=cases&taskGuide=case&from=kaigong'},
+project:{title:'创建一个项目，并加入一名数字员工',intro:'给工作建一个项目，再请一位数字员工加入。',steps:['点击对话标题旁的＋，选择创建项目。','填写项目名称，确认创建。','点击项目成员按钮，勾选至少一名数字员工，再点击添加。'],note:'实际添加成员后才算完成，不要求发送消息。',label:'去创建项目',url:'kaigong.html?taskGuide=project'}
 };
-function openTaskGuide(id){const g=guides[id];if(!g)return;pendingTask=id;$('#task-guide-title').textContent=g.title;$('#task-guide-intro').textContent=g.intro;$('#task-guide-steps').replaceChildren(...g.steps.map(text=>{const li=document.createElement('li');li.textContent=text;return li}));$('#task-guide-note').textContent=g.note;$('#task-guide-go').textContent=g.label;$('#task-guide-dialog').showModal()}
-$('#task-guide-close').onclick=$('#task-guide-cancel').onclick=()=>$('#task-guide-dialog').close();$('#task-guide-go').onclick=()=>{if(guides[pendingTask]){C.ackReminder();location.href=C.decorateUrl(guides[pendingTask].url)}};
+function openTaskGuide(id){const g=guides[id];if(!g)return;C.ackReminder();location.href=C.decorateUrl(g.url)}
 $('#preview-reminder').onclick=()=>window.WxReminders?.show(true);window.WxActivity={openTaskGuide,selectDay:()=>$('#task-groups').scrollIntoView({block:'start'})};$('#demo-tools').addEventListener('toggle',()=>document.body.classList.toggle('show-demo',$('#demo-tools').open));addEventListener('wx-campaign-change',render);addEventListener('storage',e=>{if(e.key===C.key)render()});render();
 })();

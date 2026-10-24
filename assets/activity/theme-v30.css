@@ -1,0 +1,14 @@
+/* V31: restore original green activity; retain only guide and input corrections. */
+.wx-offer-link{display:block;width:100%;border:0;padding:0;background:transparent;border-radius:11px;cursor:pointer;text-align:left;line-height:0;text-decoration:none;transition:box-shadow .16s ease}
+.wx-offer-link:hover{box-shadow:0 0 0 2px #8cbaa466}
+.wx-offer-link:focus-visible{outline:2px solid #51b492!important;outline-offset:3px}
+.wx-mascot-reminder.is-paid .wx-offer-link{display:none}
+.x29-short-intro #hint-card .hint-ok{background:#5c55b7;border-color:#5c55b7}
+.x29-short-intro #hint-card .hint-ok:hover{background:#413b91}
+#wx-task-bar{border-color:#e4dff0;color:#787088;box-shadow:0 4px 17px #3b2c6010}
+#wx-task-bar a{color:#7562b0}#wx-task-bar button{color:#a39ab3}
+.wx-task-focus{outline:2px solid #8d80c9!important;outline-offset:3px;border-radius:8px;box-shadow:0 0 0 5px #8a78ca0e}
+.x22-input{box-sizing:border-box;width:calc(100% - 24px);margin:0 12px;padding:10px 6px;border-radius:10px}
+.x22-input.wx-task-focus{outline:none!important;outline-offset:0;box-shadow:inset 0 0 0 2px #9789cf;border-radius:10px;background:#fcfbff}
+.x29-short-intro #hint-focus{outline:2px solid #8c7dca;outline-offset:3px;border-radius:10px;box-shadow:0 0 0 4px #ffffffa6}
+@media(prefers-reduced-motion:reduce){.wx-offer-link{transition:none}}

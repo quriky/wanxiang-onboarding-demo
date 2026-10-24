@@ -1,4 +1,4 @@
-/* Explicit actions for the revised six-task offer. All account and connection effects are local demos. */
+﻿/* Explicit actions for the revised six-task offer. All account and connection effects are local demos. */
 const x25Remix=x22remix;x22remix=function(){x25Remix();WxCampaign.record('remix')};
 const x25Send=sendDemo;sendDemo=function(){const project=current==='project'&&!pageGuide&&draft.trim(),count=(x22.messages.project||[]).length;x25Send();if(project&&(x22.messages.project||[]).length>count)WxCampaign.record('project-reply')};
 function x25WechatDialog(){
@@ -11,7 +11,11 @@ const x25Render=render;render=function(){
  x25Render();
  if(current==='project-create'){
   const button=hotspots.querySelector('#x22-project-submit'),create=button?.onclick;
-  if(button)button.onclick=()=>{create();if(current==='project'&&x22.project)WxCampaign.record('project-created')};
+  if(button)button.onclick=()=>{create();if(current==='project'&&x22.project)WxCampaign.record('project-created',x22.project.id)};
+ }
+ if(current==='project-members'){
+  const button=hotspots.querySelector('#x22-member-add'),add=button?.onclick;
+  if(button)button.onclick=()=>{const id=x22.project?.id;add();if(current==='project'&&x22.project?.id===id){const members=x22members().map(a=>a.id);if(members.length)WxCampaign.record('project-member-added',{projectId:id,members})}};
  }
  if(current==='phone'){
   hotspots.querySelectorAll('.x24-wechat-sub,.x24-wechat-desc').forEach(e=>e.remove());
